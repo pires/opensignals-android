@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">OpenSignals</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="label_bitalino_mac_address">Bitalino Mac Address</string>
+    <string name="button_connect">Connect</string>
+    <string name="label_port_1">Port 1</string>
+    <string name="label_port_2">Port 2</string>
+    <string name="label_port_3">Port 3</string>
+    <string name="label_port_4">Port 4</string>
+    <string name="label_port_5">Port 5</string>
+    <string name="label_port_6">Port 6</string>
+    <string name="port_none">NONE</string>
+    <string name="port_ecg">ECG</string>
+    <string name="port_emg">EMG</string>
+    <string name="port_eda">EDA</string>
+    <string name="port_luminosity">Luminosity</string>
+    <string name="port_accelerometer">Accelerometer</string>
+
+</resources>

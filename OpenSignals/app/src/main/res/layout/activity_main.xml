@@ -1,0 +1,151 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@android:color/white"
+    tools:context="pt.lighthouse.opensignals.activities.MainActivity">
+
+    <ImageView
+        android:id="@+id/image_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/logo" />
+
+    <EditText
+        android:id="@+id/field_mac_address"
+        android:layout_width="match_parent"
+        android:layout_below="@id/image_logo"
+        android:layout_marginBottom="10dp"
+        android:hint="@string/label_bitalino_mac_address"
+        android:inputType="number"
+        android:digits="0123456789ABCDEF:"
+        style="@style/Edit" />
+
+    <View
+        android:id="@+id/invisible_divisor"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerInParent="true" />
+
+    <TextView
+        android:id="@+id/label_port_one"
+        android:layout_below="@id/field_mac_address"
+        android:layout_toLeftOf="@id/invisible_divisor"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/label_port_1"
+        style="@style/Label"/>
+
+    <Spinner
+        android:id="@+id/spinner_port_one"
+        android:layout_width="match_parent"
+        android:layout_below="@id/label_port_one"
+        android:layout_toLeftOf="@id/invisible_divisor"
+        android:background="@color/opensignals_green_translucent"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="10dp"
+        style="@style/Spinner"/>
+
+    <TextView
+        android:id="@+id/label_port_two"
+        android:layout_below="@id/field_mac_address"
+        android:layout_toRightOf="@id/invisible_divisor"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/label_port_2"
+        style="@style/Label"/>
+
+    <Spinner
+        android:id="@+id/spinner_port_two"
+        android:layout_width="match_parent"
+        android:layout_below="@id/label_port_two"
+        android:layout_toRightOf="@id/invisible_divisor"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="10dp"
+        style="@style/Spinner"/>
+
+    <TextView
+        android:id="@+id/label_port_three"
+        android:layout_below="@id/spinner_port_one"
+        android:layout_toLeftOf="@id/invisible_divisor"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/label_port_3"
+        style="@style/Label"/>
+
+    <Spinner
+        android:id="@+id/spinner_port_three"
+        android:layout_width="match_parent"
+        android:layout_below="@id/label_port_three"
+        android:layout_toLeftOf="@id/invisible_divisor"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="10dp"
+        style="@style/Spinner"/>
+
+    <TextView
+        android:id="@+id/label_port_four"
+        android:layout_below="@id/spinner_port_two"
+        android:layout_toRightOf="@id/invisible_divisor"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/label_port_4"
+        style="@style/Label"/>
+
+    <Spinner
+        android:id="@+id/spinner_port_four"
+        android:layout_width="match_parent"
+        android:layout_below="@id/label_port_four"
+        android:layout_toRightOf="@id/invisible_divisor"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="10dp"
+        style="@style/Spinner"/>
+
+    <TextView
+        android:id="@+id/label_port_five"
+        android:layout_below="@id/spinner_port_three"
+        android:layout_toLeftOf="@id/invisible_divisor"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/label_port_5"
+        style="@style/Label"/>
+
+    <Spinner
+        android:id="@+id/spinner_port_five"
+        android:layout_width="match_parent"
+        android:layout_below="@id/label_port_five"
+        android:layout_toLeftOf="@id/invisible_divisor"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="10dp"
+        style="@style/Spinner"/>
+
+    <TextView
+        android:id="@+id/label_port_six"
+        android:layout_below="@id/spinner_port_four"
+        android:layout_toRightOf="@id/invisible_divisor"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="@string/label_port_6"
+        style="@style/Label"/>
+
+    <Spinner
+        android:id="@+id/spinner_port_six"
+        android:layout_width="match_parent"
+        android:layout_below="@id/label_port_six"
+        android:layout_toRightOf="@id/invisible_divisor"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="10dp"
+        style="@style/Spinner"/>
+
+    <Button
+        android:id="@+id/button_connect"
+        android:layout_alignParentBottom="true"
+        android:text="@string/button_connect"
+        style="@style/Button"/>
+
+</RelativeLayout>
