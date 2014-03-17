@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="opensignals_green">#6DDC0D</color>
+    <color name="opensignals_green_translucent">#c5f19e</color>
+    <color name="opensignals_gray">#878787</color>
+    <color name="opensignals_text_field">#646464</color>
+</resources>
