@@ -18,5 +18,7 @@
     <string name="port_eda">EDA</string>
     <string name="port_luminosity">Luminosity</string>
     <string name="port_accelerometer">Accelerometer</string>
+    <string name="title_activity_values">ValuesActivity</string>
+    <string name="button_stop_reading_values">Stop</string>
 
 </resources>

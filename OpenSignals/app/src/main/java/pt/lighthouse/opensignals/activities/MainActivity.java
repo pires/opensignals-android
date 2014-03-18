@@ -1,7 +1,10 @@
 package pt.lighthouse.opensignals.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
@@ -41,6 +44,9 @@ public class MainActivity extends RoboActivity {
   @InjectView(R.id.spinner_port_six)
   private Spinner spinnerPartSix;
 
+  @InjectView(R.id.button_connect)
+  private Button buttonConnect;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -63,5 +69,23 @@ public class MainActivity extends RoboActivity {
     spinnerPortFour.setAdapter(adapter);
     spinnerPortFive.setAdapter(adapter);
     spinnerPartSix.setAdapter(adapter);
+
+    buttonConnect.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        connectDevice();
+        loadNextActivity();
+      }
+    });
+  }
+
+  private void connectDevice() {
+    // TODO: @ppires, do your magic here
+  }
+
+  private void loadNextActivity() {
+    Intent readingsIntent = new Intent(this, ValuesActivity.class);
+    // TODO: Pass port info as extras
+    startActivity(readingsIntent);
   }
 }
