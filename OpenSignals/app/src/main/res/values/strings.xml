@@ -20,5 +20,7 @@
     <string name="port_accelerometer">Accelerometer</string>
     <string name="title_activity_values">ValuesActivity</string>
     <string name="button_stop_reading_values">Stop</string>
+    <string name="label_port_title">Port %1$d - %2$s</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

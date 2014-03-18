@@ -24,6 +24,7 @@ android {
 }
 
 dependencies {
+    compile 'com.android.support:support-v4:+'
     compile 'com.google.guava:guava:16.0.1'
     compile 'org.roboguice:roboguice:3.0-alpha-1'
     compile fileTree(dir: 'libs', include: ['*.jar'])
