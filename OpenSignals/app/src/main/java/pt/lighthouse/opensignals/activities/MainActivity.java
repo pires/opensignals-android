@@ -24,7 +24,16 @@ import roboguice.inject.InjectView;
 @ContentView(R.layout.activity_main)
 public class MainActivity extends RoboActivity {
 
+  private static final String TAG = MainActivity.class.getSimpleName();
+
   private List<Port> portList;
+
+  public static final String EXTRA_PORT_ONE = "portOne";
+  public static final String EXTRA_PORT_TWO = "portTwo";
+  public static final String EXTRA_PORT_THREE = "portThree";
+  public static final String EXTRA_PORT_FOUR = "portFour";
+  public static final String EXTRA_PORT_FIVE = "portFive";
+  public static final String EXTRA_PORT_SIX = "portSix";
 
   @InjectView(R.id.spinner_port_one)
   private Spinner spinnerPortOne;
@@ -42,7 +51,7 @@ public class MainActivity extends RoboActivity {
   private Spinner spinnerPortFive;
 
   @InjectView(R.id.spinner_port_six)
-  private Spinner spinnerPartSix;
+  private Spinner spinnerPortSix;
 
   @InjectView(R.id.button_connect)
   private Button buttonConnect;
@@ -68,7 +77,7 @@ public class MainActivity extends RoboActivity {
     spinnerPortThree.setAdapter(adapter);
     spinnerPortFour.setAdapter(adapter);
     spinnerPortFive.setAdapter(adapter);
-    spinnerPartSix.setAdapter(adapter);
+    spinnerPortSix.setAdapter(adapter);
 
     buttonConnect.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -85,7 +94,14 @@ public class MainActivity extends RoboActivity {
 
   private void loadNextActivity() {
     Intent readingsIntent = new Intent(this, ValuesActivity.class);
-    // TODO: Pass port info as extras
+
+    readingsIntent.putExtra(EXTRA_PORT_ONE, (Port) spinnerPortOne.getSelectedItem());
+    readingsIntent.putExtra(EXTRA_PORT_TWO, (Port) spinnerPortTwo.getSelectedItem());
+    readingsIntent.putExtra(EXTRA_PORT_THREE, (Port) spinnerPortThree.getSelectedItem());
+    readingsIntent.putExtra(EXTRA_PORT_FOUR, (Port) spinnerPortFour.getSelectedItem());
+    readingsIntent.putExtra(EXTRA_PORT_FIVE, (Port) spinnerPortFive.getSelectedItem());
+    readingsIntent.putExtra(EXTRA_PORT_SIX, (Port) spinnerPortSix.getSelectedItem());
+
     startActivity(readingsIntent);
   }
 }

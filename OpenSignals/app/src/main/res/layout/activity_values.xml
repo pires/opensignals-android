@@ -9,14 +9,14 @@
         android:id="@+id/button_stop_reading_values"
         android:layout_alignParentBottom="true"
         android:text="@string/button_stop_reading_values"
-        android:background="@android:color/holo_red_light"
+        android:background="@color/opensignals_red"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginBottom="@dimen/activity_vertical_margin"
         style="@style/Button" />
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
+        android:id="@+id/pager_ports"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/button_stop_reading_values"
