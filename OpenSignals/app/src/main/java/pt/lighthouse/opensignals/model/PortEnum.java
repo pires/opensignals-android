@@ -7,6 +7,6 @@ public enum PortEnum {
   ECG,
   EMG,
   EDA,
-  LUMINOSITY,
-  ACCELEROMETER;
+  LUX,
+  ACC;
 }

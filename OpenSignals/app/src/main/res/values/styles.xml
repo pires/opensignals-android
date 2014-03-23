@@ -22,6 +22,7 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textStyle">bold</item>
         <item name="android:background">@color/opensignals_green</item>
+        <item name="android:layout_centerVertical">true</item>
         <item name="android:textAllCaps">true</item>
     </style>
 

@@ -2,8 +2,6 @@
 <resources>
 
     <string name="app_name">OpenSignals</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
     <string name="label_bitalino_mac_address">Bitalino Mac Address</string>
     <string name="button_connect">Connect</string>
     <string name="label_port_1">Port 1</string>
@@ -16,11 +14,24 @@
     <string name="port_ecg">ECG</string>
     <string name="port_emg">EMG</string>
     <string name="port_eda">EDA</string>
-    <string name="port_luminosity">Luminosity</string>
-    <string name="port_accelerometer">Accelerometer</string>
+    <string name="port_lux">Luminosity</string>
+    <string name="port_acc">Accelerometer</string>
     <string name="title_activity_values">ValuesActivity</string>
     <string name="button_stop_reading_values">Stop</string>
-    <string name="label_port_title">Port %1$d - %2$s</string>
+    <string name="label_port_title">Port %1$d</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_port_description">Port type: %1$s (%2$s)</string>
+    <string name="ecg_unit">mV</string>
+    <string name="emg_unit">mV</string>
+    <string name="eda_unit">µS</string>
+    <string name="none_unit"/>
+    <string name="lux_unit">%</string>
+    <string name="acc_unit">g</string>
+    <string name="label_domain">Time (s)</string>
+    <string name="label_ok">OK</string>
+    <string name="message_no_ports">No ports configured</string>
+    <string name="message_stop_readings">Do you want to stop the readings?</string>
+    <string name="button_yes">Yes</string>
+    <string name="button_no">No</string>
 
 </resources>

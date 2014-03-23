@@ -5,43 +5,38 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import java.util.Map;
+import java.util.List;
 
 import pt.lighthouse.opensignals.R;
+import pt.lighthouse.opensignals.fragments.PortPageFragment;
 import pt.lighthouse.opensignals.model.Port;
-import pt.lighthouse.opensignals.model.PortEnum;
 
 /**
- * Created by fork on 18/03/14.
+ * Created on 18/03/14.
  */
 public class PortViewPagerAdapter extends FragmentPagerAdapter {
 
-  private Map<Integer, Port> portInfo;
+  private List<Port> ports;
   private Context context;
 
-  public PortViewPagerAdapter(FragmentManager fm, Map<Integer, Port> portInfo) {
+  public PortViewPagerAdapter(Context context, FragmentManager fm, List<Port> ports) {
     super(fm);
-    this.portInfo = portInfo;
+    this.context = context;
+    this.ports = ports;
   }
 
   @Override
   public Fragment getItem(int position) {
-    return null;
+    return PortPageFragment.newInstance(ports.get(position));
   }
 
   @Override
   public CharSequence getPageTitle(int position) {
-    String portDescription = portInfo.get(position).getName();
-    return context.getString(R.string.label_port_title, position, portDescription);
+    return context.getString(R.string.label_port_title, ports.get(position).getNumber());
   }
 
   @Override
   public int getCount() {
-    int count = 0;
-    for (Port port : portInfo.values()){
-      if (port.getPort() != PortEnum.NONE)
-        count++;
-    }
-    return count;
+    return ports.size();
   }
 }
