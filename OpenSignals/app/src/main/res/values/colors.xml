@@ -4,4 +4,5 @@
     <color name="opensignals_green_translucent">#c5f19e</color>
     <color name="opensignals_gray">#878787</color>
     <color name="opensignals_text_field">#646464</color>
+    <color name="opensignals_red">@android:color/holo_red_light</color>
 </resources>
