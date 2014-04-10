@@ -14,15 +14,16 @@ import android.view.View;
 import android.widget.Button;
 
 import com.bitalino.comm.BITalinoDevice;
-import com.bitalino.comm.BITalinoException;
 import com.bitalino.comm.BITalinoFrame;
+import com.bitalino.opensignals.BITalinoSeries;
+import com.bitalino.opensignals.BITalinoSeriesObserver;
 import com.bitalino.opensignals.R;
 import com.bitalino.opensignals.adapters.PortViewPagerAdapter;
 import com.bitalino.opensignals.model.Port;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -58,6 +59,7 @@ public class ValuesActivity extends RoboFragmentActivity {
 
   private String macAddress;
 
+  BITalinoSeries seriesPort1;
   private ReadBITalinoAsyncTask task = new ReadBITalinoAsyncTask();
 
   @Override
@@ -68,7 +70,18 @@ public class ValuesActivity extends RoboFragmentActivity {
     if (intent != null) {
       macAddress = intent.getExtras().getString(MainActivity.EXTRA_MACADDRESS);
       final List<Port> ports = intent.getParcelableArrayListExtra(MainActivity.EXTRA_PORTS);
-      portPager.setAdapter(new PortViewPagerAdapter(this, getSupportFragmentManager(), ports));
+
+      seriesPort1 = new BITalinoSeries(ports.get(0).getName());
+      BITalinoSeriesObserver observerPort1 = new BITalinoSeriesObserver();
+      seriesPort1.addObserver(observerPort1);
+
+      List<BITalinoSeries> series = new ArrayList<>(6);
+      series.add(seriesPort1);
+
+      List<BITalinoSeriesObserver> observers = new ArrayList<>(6);
+      observers.add(observerPort1);
+
+      portPager.setAdapter(new PortViewPagerAdapter(this, getSupportFragmentManager(), ports, series, observers));
     } else {
       throw new IllegalStateException("This activity needs to be started from an intent.");
     }
@@ -91,6 +104,7 @@ public class ValuesActivity extends RoboFragmentActivity {
           @Override
           public void onClick(DialogInterface dialog, int which) {
             task.cancel(true);
+            task = null;
             ValuesActivity.super.onBackPressed();
           }
         })
@@ -134,7 +148,7 @@ public class ValuesActivity extends RoboFragmentActivity {
         sock = dev.createRfcommSocketToServiceRecord(MY_UUID);
         sock.connect();
 
-        BITalinoDevice bitalino = new BITalinoDevice(1000, new int[]{0, 1, 2, 3, 4, 5});
+        BITalinoDevice bitalino = new BITalinoDevice(100, new int[]{0, 1, 2, 3, 4, 5});
         Log.i(TAG, "Connecting to BITalino [" + remoteDevice + "]..");
         bitalino.open(sock.getInputStream(), sock.getOutputStream());
         Log.i(TAG, "Connected.");
@@ -146,10 +160,12 @@ public class ValuesActivity extends RoboFragmentActivity {
         bitalino.start();
 
         // read n samples
-        final int numberOfSamplesToRead = 1000;
+        final int numberOfSamplesToRead = 100;
         Log.i(TAG, "Reading " + numberOfSamplesToRead + " samples..");
-        BITalinoFrame[] frames = bitalino.read(numberOfSamplesToRead);
-        publishProgress(frames);
+        while (!isCancelled()) {
+          BITalinoFrame[] frames = bitalino.read(numberOfSamplesToRead);
+          publishProgress(frames);
+        }
       } catch (Exception e) {
         Log.e(TAG, "There was an error.", e);
       }
@@ -164,7 +180,14 @@ public class ValuesActivity extends RoboFragmentActivity {
 
     @Override
     protected void onProgressUpdate(BITalinoFrame... frames) {
-      // TODO update series
+      // update series
+      int counter = 0;
+      for (BITalinoFrame frame : frames) {
+        if (seriesPort1.size() > 90)
+          seriesPort1.removeFirst();
+        seriesPort1.addLast(counter++, frame.getAnalog(0));
+        if (counter > 90) counter = 0;
+      }
     }
 
     @Override
@@ -179,11 +202,11 @@ public class ValuesActivity extends RoboFragmentActivity {
         Log.i(TAG, "BITalino is stopped");
         sock.close();
         Log.i(TAG, "And we're done! :-)");
-      } catch (BITalinoException | IOException e) {
+      } catch (Exception e) {
         // ignore it
       }
     }
 
-
   }
+
 }

@@ -2,15 +2,15 @@
 <resources>
 
     <string name="app_name">OpenSignals</string>
-    <string name="label_bitalino_mac_address">Bitalino Mac Address</string>
+    <string name="label_bitalino_mac_address">BITalino MAC Address</string>
     <string name="button_connect">Connect</string>
-    <string name="label_port_1">Port 1</string>
-    <string name="label_port_2">Port 2</string>
-    <string name="label_port_3">Port 3</string>
-    <string name="label_port_4">Port 4</string>
-    <string name="label_port_5">Port 5</string>
-    <string name="label_port_6">Port 6</string>
-    <string name="port_none">NONE</string>
+    <string name="label_port_1">Analog 1</string>
+    <string name="label_port_2">Analog 2</string>
+    <string name="label_port_3">Analog 3</string>
+    <string name="label_port_4">Analog 4</string>
+    <string name="label_port_5">Analog 5</string>
+    <string name="label_port_6">Analog 6</string>
+    <string name="port_none">Select sensor</string>
     <string name="port_ecg">ECG</string>
     <string name="port_emg">EMG</string>
     <string name="port_eda">EDA</string>

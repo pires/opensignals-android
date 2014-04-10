@@ -21,11 +21,12 @@
         android:id="@+id/field_mac_address"
         android:layout_width="match_parent"
         android:layout_below="@id/image_logo"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:hint="@string/label_bitalino_mac_address"
-        android:inputType="number"
-        android:digits="0123456789ABCDEF:"
-        style="@style/Edit" />
+        android:editable="true"
+        android:singleLine="true"
+        style="@style/Edit"/>
 
     <View
         android:id="@+id/invisible_divisor"
