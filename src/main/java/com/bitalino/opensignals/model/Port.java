@@ -1,4 +1,4 @@
-package pt.lighthouse.opensignals.model;
+package com.bitalino.opensignals.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

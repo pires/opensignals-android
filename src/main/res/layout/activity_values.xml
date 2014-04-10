@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    tools:context="pt.lighthouse.opensignals.activities.ValuesActivity">
+    tools:context="com.bitalino.opensignals.activities.ValuesActivity">
 
     <Button
         android:id="@+id/button_stop_reading_values"

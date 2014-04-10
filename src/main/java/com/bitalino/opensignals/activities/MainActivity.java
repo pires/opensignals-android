@@ -1,4 +1,4 @@
-package pt.lighthouse.opensignals.activities;
+package com.bitalino.opensignals.activities;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -6,14 +6,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import pt.lighthouse.opensignals.R;
-import pt.lighthouse.opensignals.model.Port;
-import pt.lighthouse.opensignals.model.PortEnum;
+import com.bitalino.opensignals.R;
+import com.bitalino.opensignals.model.Port;
+import com.bitalino.opensignals.model.PortEnum;
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -29,7 +30,11 @@ public class MainActivity extends RoboActivity {
 
   private List<Port> portList;
 
+  public static final String EXTRA_MACADDRESS = "macAddress";
   public static final String EXTRA_PORTS = "ports";
+
+  @InjectView(R.id.field_mac_address)
+  private EditText txtMacAddress;
 
   @InjectView(R.id.spinner_port_one)
   private Spinner spinnerPortOne;
@@ -77,14 +82,9 @@ public class MainActivity extends RoboActivity {
     buttonConnect.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        connectDevice();
         loadNextActivity();
       }
     });
-  }
-
-  private void connectDevice() {
-    // TODO: @ppires, do your magic here
   }
 
   /**
@@ -114,6 +114,7 @@ public class MainActivity extends RoboActivity {
     checkAndAddPort(ports, port6, 6);
 
     if (ports.size() > 0) {
+      readingsIntent.putExtra(EXTRA_MACADDRESS, txtMacAddress.getText().toString());
       readingsIntent.putExtra(EXTRA_PORTS, ports);
       startActivity(readingsIntent);
     } else {

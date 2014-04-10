@@ -1,4 +1,4 @@
-package pt.lighthouse.opensignals.adapters;
+package com.bitalino.opensignals.adapters;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -7,9 +7,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-import pt.lighthouse.opensignals.R;
-import pt.lighthouse.opensignals.fragments.PortPageFragment;
-import pt.lighthouse.opensignals.model.Port;
+import com.bitalino.opensignals.R;
+import com.bitalino.opensignals.fragments.PortPageFragment;
+import com.bitalino.opensignals.model.Port;
 
 /**
  * Created on 18/03/14.

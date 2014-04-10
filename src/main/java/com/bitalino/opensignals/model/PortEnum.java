@@ -1,4 +1,4 @@
-package pt.lighthouse.opensignals.model;
+package com.bitalino.opensignals.model;
 
 /**
  */

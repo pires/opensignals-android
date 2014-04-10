@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="pt.lighthouse.opensignals">
+          package="com.bitalino.opensignals">
 
     <application
         android:allowBackup="true"
@@ -8,7 +8,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.MainActivity"
+            android:name="com.bitalino.opensignals.activities.MainActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.ValuesActivity">
+            android:name="com.bitalino.opensignals.activities.ValuesActivity">
         </activity>
     </application>
 

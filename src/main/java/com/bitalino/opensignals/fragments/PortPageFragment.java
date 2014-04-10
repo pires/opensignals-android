@@ -1,4 +1,4 @@
-package pt.lighthouse.opensignals.fragments;
+package com.bitalino.opensignals.fragments;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,8 +17,8 @@ import com.androidplot.xy.XYStepMode;
 
 import java.text.DecimalFormat;
 
-import pt.lighthouse.opensignals.R;
-import pt.lighthouse.opensignals.model.Port;
+import com.bitalino.opensignals.R;
+import com.bitalino.opensignals.model.Port;
 import roboguice.fragment.RoboFragment;
 import roboguice.inject.InjectView;
 
