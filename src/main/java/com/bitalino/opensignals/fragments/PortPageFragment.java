@@ -1,13 +1,16 @@
 package com.bitalino.opensignals.fragments;
 
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.androidplot.Plot;
+import com.androidplot.PlotListener;
 import com.androidplot.ui.SizeLayoutType;
 import com.androidplot.ui.XLayoutStyle;
 import com.androidplot.xy.BoundaryMode;
@@ -23,12 +26,10 @@ import com.bitalino.opensignals.model.Port;
 
 import java.text.DecimalFormat;
 
-import roboguice.fragment.RoboFragment;
-
 /**
  * Where plot magic happens.
  */
-public class PortPageFragment extends RoboFragment {
+public class PortPageFragment extends Fragment {
   private static final String TAG = PortPageFragment.class.getSimpleName();
 
   // The port entity associated with this fragment
@@ -39,6 +40,7 @@ public class PortPageFragment extends RoboFragment {
   // views
   private TextView labelPortDescription;
   private XYPlot plot;
+  private int frameCounter = 0;
 
   public PortPageFragment() {
   }
@@ -70,17 +72,31 @@ public class PortPageFragment extends RoboFragment {
 
     // get views
     labelPortDescription = (TextView) getView().findViewById(R.id.label_port_description);
-    plot = (XYPlot) getView().findViewById(R.id.dynamicPlot);
-    observer.setPlot(plot);
-
-    LineAndPointFormatter format = new LineAndPointFormatter();
-    format.setPointLabelFormatter(new PointLabelFormatter());
-    plot.addSeries(series, format);
     labelPortDescription.setText(getString(R.string.label_port_description, port.getName(), port.getUnit()));
+
+    plot = (XYPlot) getView().findViewById(R.id.dynamicPlot);
+
+    // scroll automatically
+    plot.addListener(new PlotListener() {
+      @Override
+      public void onBeforeDraw(Plot source, Canvas canvas) {
+        // ignore
+      }
+
+      @Override
+      public void onAfterDraw(Plot source, Canvas canvas) {
+        plot.setDomainBoundaries(frameCounter - 5000, frameCounter, BoundaryMode.FIXED);
+        frameCounter += 1000;
+      }
+    });
+    observer.setPlot(plot);
 
     setupGraphWidget();
     setupDomainWidget();
     setupRangeWidget();
+
+    LineAndPointFormatter format = new LineAndPointFormatter(Color.rgb(118, 182, 200), Color.rgb(118, 182, 200), Color.TRANSPARENT, new PointLabelFormatter());
+    plot.addSeries(series, format);
   }
 
   private void setupGraphWidget() {
@@ -103,14 +119,14 @@ public class PortPageFragment extends RoboFragment {
     graphWidget.getDomainOriginLabelPaint().setColor(getResources().getColor(R.color.opensignals_text_field));
     graphWidget.getDomainOriginLabelPaint().setTextSize(40.0f);
     graphWidget.getDomainOriginLinePaint().setColor(getResources().getColor(R.color.opensignals_text_field));
-    graphWidget.getDomainOriginLinePaint().setStrokeWidth(1.5f);
+    graphWidget.getDomainOriginLinePaint().setStrokeWidth(0.5f);
     graphWidget.getDomainGridLinePaint().setColor(Color.TRANSPARENT);
 
     // Customize the origin range label, set the applications color, fix up the sizes and tweaks to the gridlines
     graphWidget.getRangeOriginLabelPaint().setColor(getResources().getColor(R.color.opensignals_text_field));
     graphWidget.getRangeOriginLabelPaint().setTextSize(40.0f);
     graphWidget.getRangeOriginLinePaint().setColor(getResources().getColor(R.color.opensignals_text_field));
-    graphWidget.getRangeOriginLinePaint().setStrokeWidth(1.5f);
+    graphWidget.getRangeOriginLinePaint().setStrokeWidth(0.5f);
     graphWidget.getRangeGridLinePaint().setStrokeWidth(1.0f);
 
     // Remove unnecessary widgets
@@ -126,12 +142,11 @@ public class PortPageFragment extends RoboFragment {
     plot.getDomainLabelWidget().setWidth(1.0f, SizeLayoutType.RELATIVE);
     plot.getDomainLabelWidget().getPositionMetrics().getXPositionMetric().set(0, XLayoutStyle.RELATIVE_TO_LEFT);
     plot.getDomainLabelWidget().setClippingEnabled(false);
-    plot.setDomainBoundaries(0, 90, BoundaryMode.FIXED);
+    plot.setDomainBoundaries(0, 5000, BoundaryMode.FIXED);
     plot.setDomainStepMode(XYStepMode.INCREMENT_BY_VAL);
-    plot.setDomainStepValue(1);
-    plot.setDomainValueFormat(new DecimalFormat("0"));
-    plot.getGraphWidget().getDomainLabelPaint().setColor(getResources().getColor(R.color.opensignals_text_field));
-    plot.getGraphWidget().getDomainLabelPaint().setTextSize(40.0f);
+    plot.setDomainStepValue(10);
+    plot.getGraphWidget().setDomainLabelPaint(null);
+    plot.getGraphWidget().setDomainOriginLabelPaint(null);
   }
 
   private void setupRangeWidget() {

@@ -12,6 +12,7 @@
     android:theme="@style/AppTheme">
     <activity
       android:name="com.bitalino.opensignals.activities.MainActivity"
+      android:screenOrientation="portrait"
       android:theme="@style/AppTheme">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
@@ -19,7 +20,8 @@
       </intent-filter>
     </activity>
     <activity
-      android:name="com.bitalino.opensignals.activities.ValuesActivity">
+      android:name="com.bitalino.opensignals.activities.ValuesActivity"
+      android:screenOrientation="landscape">
     </activity>
   </application>
 

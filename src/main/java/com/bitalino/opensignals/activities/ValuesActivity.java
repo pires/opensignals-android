@@ -61,6 +61,7 @@ public class ValuesActivity extends RoboFragmentActivity {
 
   BITalinoSeries seriesPort1;
   private ReadBITalinoAsyncTask task = new ReadBITalinoAsyncTask();
+  private int frameCounter = 0;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -148,7 +149,7 @@ public class ValuesActivity extends RoboFragmentActivity {
         sock = dev.createRfcommSocketToServiceRecord(MY_UUID);
         sock.connect();
 
-        BITalinoDevice bitalino = new BITalinoDevice(100, new int[]{0, 1, 2, 3, 4, 5});
+        BITalinoDevice bitalino = new BITalinoDevice(1000, new int[]{0, 1, 2, 3, 4, 5});
         Log.i(TAG, "Connecting to BITalino [" + remoteDevice + "]..");
         bitalino.open(sock.getInputStream(), sock.getOutputStream());
         Log.i(TAG, "Connected.");
@@ -160,7 +161,7 @@ public class ValuesActivity extends RoboFragmentActivity {
         bitalino.start();
 
         // read n samples
-        final int numberOfSamplesToRead = 100;
+        final int numberOfSamplesToRead = 1000;
         Log.i(TAG, "Reading " + numberOfSamplesToRead + " samples..");
         while (!isCancelled()) {
           BITalinoFrame[] frames = bitalino.read(numberOfSamplesToRead);
@@ -181,12 +182,15 @@ public class ValuesActivity extends RoboFragmentActivity {
     @Override
     protected void onProgressUpdate(BITalinoFrame... frames) {
       // update series
-      int counter = 0;
       for (BITalinoFrame frame : frames) {
-        if (seriesPort1.size() > 90)
+        // don't overflow series buffer, but maintain some history
+        if (seriesPort1.size() > 2500)
           seriesPort1.removeFirst();
-        seriesPort1.addLast(counter++, frame.getAnalog(0));
-        if (counter > 90) counter = 0;
+
+        // add value each 50 frames count
+        if (frameCounter % 50 == 0)
+          seriesPort1.addLast(frameCounter, frame.getAnalog(0));
+        frameCounter++;
       }
     }
 
